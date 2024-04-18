@@ -52,7 +52,7 @@ header p {
   letter-spacing: .15em;
   animation: 
     typing 10s steps(28, end) infinite,
-    blink-caret .6s step-end infinite,
+    blink-caret 1s step-end infinite,
     infinite
 }
 
