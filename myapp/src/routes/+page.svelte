@@ -1,12 +1,19 @@
 <script>
 	import { marked } from 'marked';
     import { writable } from 'svelte/store';
+    import gitIcon from '../icons/social.png';
+    import linkinIcon from '../icons/linkedin.png'
+    import discordIcon from '../icons/discord.png'
 
 	let value = `Some words are *italic*, some are **bold**\n\n- lists\n- are\n- cool`;
     let count = writable(value.length);
     
     $: {
         count.set(value.length);
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text)
     }
 </script>
 
@@ -19,7 +26,14 @@
 
     <main>
         <div class="editor-head">
-            <div class="left-side"><p>Markdown</p></div>
+            <div class="left-side">
+                <p>Markdown</p>
+                <button class="copy-btn" on:click={() => copyToClipboard(value)}>
+                    <span class="material-symbols-outlined">
+                        content_copy
+                    </span>
+                </button>
+            </div>
             <div class="right-side"><p>Preview</p><p>Characters:<i style="color: black;">{$count}</i></p></div>
         </div>
 
@@ -40,7 +54,12 @@
 
     </main>
     <footer>
-        footer
+        <div class="icons">
+            <a href="https://github.com/Rllopez0410"><img src="{gitIcon}" alt="" style="width: 30px; height: 30px;"></a>
+            <a href="https://www.linkedin.com/in/roger-lopez-98b5492b6/"><img src="{linkinIcon}" alt="" style="width: 30px; height: 30px;"></a>
+            <a href="https://github.com/Rllopez0410"><img src="{discordIcon}" alt="" style="width: 30px; height: 30px;"></a>
+        </div>
+        <div>© 2024 made by Roger Lopez. Powered by <a href="https://svelte.dev/">Svelte</a></div>
     </footer>
 </div>
 
@@ -110,9 +129,16 @@ main {
 }
 
 .left-side {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     flex: 1;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.left-side span {
+    cursor: pointer;
 }
 
 .right-side {
@@ -171,7 +197,35 @@ textarea:focus {
 }
 
 footer {
-    flex: .2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Source Code Pro", monospace;
+    flex: .5;
     border-top: 1.5px solid rgb(215, 215, 215);
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 200px;
+}
+
+.copy-btn {
+    background-color: white;
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    color: orangered;
+}
+
+img {
+    border-radius: 100px;
+    box-shadow: 2px 2px 3px rgb(164, 164, 164);
 }
 </style>
