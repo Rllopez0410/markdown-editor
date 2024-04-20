@@ -19,9 +19,22 @@
 
 <div class="container">
     <header>
-        <p>
-        <span><i>Markify</i></span>: Your Gateway to Markdown Mastery!
-        </p>
+        <div class="menu-btn">
+            <button>
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+            </button>
+        </div>
+
+    <div class="title">
+        <p><span><i>Markify</i></span>: Your Gateway to Markdown Mastery!</p>
+    </div>
+        <div class="darkmode">
+            <div class="switch">
+                <div></div>
+            </div>
+        </div>
     </header>
 
     <main>
@@ -78,6 +91,44 @@ header {
     background-color: #ffffff;
     box-shadow: 0px .5px 4px rgb(156, 156, 156);
     flex: .3;
+}
+
+.menu-btn {
+    flex: 1;
+}
+
+.menu-btn button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.title {flex: 6;}
+
+.darkmode {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex: 1;
+    padding-right: 5px;
+}
+
+.switch {
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    background-color: rgb(154, 154, 154);
+    width: 40px;
+    height: 20px;
+    box-shadow: 1px 1px 5px #585858 inset;
+    padding: 1px;
+}
+
+.switch div {
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 100px;
 }
 
 header p {
@@ -165,6 +216,8 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: .3;
+    color: orangered;
     flex: .2;
     gap: 3.09px;
     box-shadow: .5px 0px 4px rgb(156, 156, 156);
