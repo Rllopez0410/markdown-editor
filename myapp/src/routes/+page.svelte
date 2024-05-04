@@ -7,6 +7,7 @@
 
 	let value = `Some words are *italic*, some are **bold**\n\n- lists\n- are\n- cool`;
     let count = writable(value.length);
+    let darkMode = false;
     
     $: {
         count.set(value.length);
@@ -14,6 +15,13 @@
 
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text)
+    }
+
+    function isDarkMode() {
+        if (!darkMode) {
+            darkMode = true;
+            document.body.style.backgroundColor = "blue";
+        }
     }
 </script>
 
@@ -31,9 +39,9 @@
         <p><span><i>Markify</i></span>: Your Gateway to Markdown Mastery!</p>
     </div>
         <div class="darkmode">
-            <div class="switch">
+            <button class="switch" on:click={isDarkMode}>
                 <div></div>
-            </div>
+            </button>
         </div>
     </header>
 
@@ -122,6 +130,7 @@ header {
     height: 20px;
     box-shadow: 1px 1px 5px #585858 inset;
     padding: 1px;
+    border: none;
 }
 
 .switch div {
@@ -216,6 +225,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(212, 212, 212);
     flex: .3;
     color: orangered;
     flex: .2;
@@ -246,6 +256,7 @@ textarea:focus {
     display: flex;
     text-align: left;
     flex-direction: column;
+    font-size: 22px;
     flex: 1;
 }
 
