@@ -23,9 +23,9 @@
 </script>
 
 <div class="container">
-    <header class={darkMode === false ? "header" : "header-light-mode"}>
-        <div class="menu-btn">
-            <button>
+    <header class={darkMode === false ? "header" : "header-dark-mode"}>
+        <div class="menu">
+            <button class="menu-btn">
                 <span class="material-symbols-outlined">
                     menu
                 </span>
@@ -43,7 +43,7 @@
     </header>
 
     <main>
-        <div class="editor-head">
+        <div class={darkMode === false ? "editor-head-light" : "editor-head-dark"}>
             <div class="left-side">
                 <p>Markdown</p>
                 <button class="copy-btn" on:click={() => copyToClipboard(value)}>
@@ -52,26 +52,26 @@
                     </span>
                 </button>
             </div>
-            <div class="right-side"><p>Preview</p><p>Characters:<i style="color: black;">{$count}</i></p></div>
+            <div class={darkMode === false ? "right-side" : "right-side-dark"}><p>Preview</p><p>Characters:<i style="color: black;">{$count}</i></p></div>
         </div>
 
         <div class="ui">
             <div class="txt-input">
-                <div class="number-line">
+                <div class={darkMode === false ? "number-line-light" : "number-line-dark"}>
                     {#each Array.from({ length: value.split('\n').length }) as _, i}
                         <div>{i + 1}</div>
                     {/each}
                 </div>
-                <textarea bind:value={value}></textarea>
+                <textarea class={darkMode === false ? "" : "textarea-dark"} bind:value={value}></textarea>
             </div>
         
-            <div class="txt-output">
+            <div class={darkMode === false ? "txt-output" : "txt-output-dark"}>
                 {@html marked(value)}
             </div>
         </div>
 
     </main>
-    <footer>
+    <footer class={darkMode === false ? "" : "footer-dark"}>
         <div class="icons">
             <a href="https://github.com/Rllopez0410"><img src="{gitIcon}" alt="" style="width: 30px; height: 30px;"></a>
             <a href="https://www.linkedin.com/in/roger-lopez-98b5492b6/"><img src="{linkinIcon}" alt="" style="width: 30px; height: 30px;"></a>
@@ -86,7 +86,6 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    border: 1px solid orangered;
 }
 
 .header {
@@ -98,22 +97,21 @@
     transition: 500ms;
 }
 
-.header-light-mode {
+.header-dark-mode {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #373737;
-    box-shadow: 0px .3px 4px #9c9c9c;
     flex: .3;
     transition: 500ms;
 }
 
-.menu-btn {
+.menu {
     flex: 1;
 }
 
-.menu-btn button {
-    background-color: white;
+.menu-btn {
+    background-color: inherit;
     border: none;
     cursor: pointer;
 }
@@ -156,7 +154,7 @@
     height: 15px;
     background-color: white;
     border-radius: 100px;
-    transition: 400ms;
+    transition: 500ms;
 }
 .switch-dark {
     position: relative;
@@ -165,7 +163,7 @@
     height: 15px;
     background-color: orangered;
     border-radius: 100px; 
-    transition: 400ms;
+    transition: 500ms;
 }
 
 header p {
@@ -209,11 +207,20 @@ main {
     flex: 5;
 }
 
-.editor-head {
+.editor-head-light {
     display: flex;
     border-bottom: 1.5px solid rgb(215, 215, 215);
     font-family: "Source Code Pro", monospace;
     color: #b6b6b6;
+    transition: 600ms;
+}
+.editor-head-dark {
+    display: flex;
+    border-bottom: 1.5px solid rgb(215, 215, 215);
+    font-family: "Source Code Pro", monospace;
+    background-color: #373737;
+    color: #b6b6b6;
+    transition: 600ms;
 }
 
 .left-side {
@@ -225,8 +232,9 @@ main {
     padding-right: 10px;
 }
 
-.left-side span {
+.left-side button {
     cursor: pointer;
+    background-color: inherit;
 }
 
 .right-side {
@@ -236,6 +244,15 @@ main {
     border-left: 1.5px solid rgb(215, 215, 215);
     padding-left: 10px;
     padding-right: 10px;
+    transition: 700ms;
+}
+.right-side-dark {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: 700ms;
 }
 
 .ui {
@@ -249,7 +266,7 @@ main {
     flex: 1;
 }
 
-.number-line {
+.number-line-light {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -260,9 +277,26 @@ main {
     gap: 3.09px;
     box-shadow: .5px 0px 4px rgb(156, 156, 156);
     z-index: 1;
+    transition: 800ms;
+}
+.number-line-dark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #373737;
+    flex: .3;
+    color: orangered;
+    flex: .2;
+    gap: 3.09px;
+    box-shadow: .5px 0px 4px rgb(156, 156, 156);
+    z-index: 1;
+    transition: 800ms;
 }
 
-.number-line :nth-child(n + 1) {
+.number-line-light :nth-child(n + 1) {
+    height: 16px;
+}
+.number-line-dark :nth-child(n + 1) {
     height: 16px;
 }
 
@@ -274,6 +308,18 @@ textarea {
     font-size: 16px;
     padding-left: 10px;
     padding-right: 10px;
+    transition: 900ms
+}
+.textarea-dark {
+    resize: none;
+    flex: 5;
+    border: none;
+    background-color: #292b2b;
+    color: orangered;
+    font-size: 16px;
+    padding-left: 10px;
+    padding-right: 10px; 
+    transition: 900ms
 }
 
 textarea:focus {
@@ -286,6 +332,17 @@ textarea:focus {
     flex-direction: column;
     font-size: 22px;
     flex: 1;
+    transition: 1200ms;
+}
+.txt-output-dark {
+    display: flex;
+    text-align: left;
+    color: rgb(222, 222, 222);
+    background-color: #525456;
+    flex-direction: column;
+    font-size: 22px;
+    flex: 1;
+    transition: 1200ms
 }
 
 footer {
@@ -296,6 +353,19 @@ footer {
     font-family: "Source Code Pro", monospace;
     flex: .5;
     border-top: 1.5px solid rgb(215, 215, 215);
+    transition: 1100ms;
+}
+.footer-dark {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: "Source Code Pro", monospace;
+    background-color: #373737;
+    flex: .5;
+    border-top: 1.5px solid rgb(215, 215, 215);
+    transition:1100ms;
 }
 
 .icons {
@@ -318,6 +388,5 @@ a {
 
 img {
     border-radius: 100px;
-    box-shadow: 2px 2px 3px rgb(164, 164, 164);
 }
 </style>
