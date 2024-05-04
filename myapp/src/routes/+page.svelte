@@ -18,15 +18,12 @@
     }
 
     function isDarkMode() {
-        if (!darkMode) {
-            darkMode = true;
-            document.body.style.backgroundColor = "blue";
-        }
+        darkMode = !darkMode;
     }
 </script>
 
 <div class="container">
-    <header>
+    <header class={darkMode === false ? "header" : "header-light-mode"}>
         <div class="menu-btn">
             <button>
                 <span class="material-symbols-outlined">
@@ -38,9 +35,9 @@
     <div class="title">
         <p><span><i>Markify</i></span>: Your Gateway to Markdown Mastery!</p>
     </div>
-        <div class="darkmode">
+        <div class = {darkMode === false ? "darkmode" : "lightmode"}>
             <button class="switch" on:click={isDarkMode}>
-                <div></div>
+                <div class= {darkMode === false ? "switch-light" : "switch-dark"}></div>
             </button>
         </div>
     </header>
@@ -92,13 +89,23 @@
     border: 1px solid orangered;
 }
 
-header {
+.header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
-    box-shadow: 0px .5px 4px rgb(156, 156, 156);
+    box-shadow: 0px .5px 4px #9c9c9c;
     flex: .3;
+    transition: 500ms;
+}
+
+.header-light-mode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #373737;
+    box-shadow: 0px .3px 4px #9c9c9c;
+    flex: .3;
+    transition: 500ms;
 }
 
 .menu-btn {
@@ -119,6 +126,15 @@ header {
     align-items: center;
     flex: 1;
     padding-right: 5px;
+    transition: 1s;
+}
+.lightmode {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex: 1;
+    padding-right: 5px;
+    transition: 1s;
 }
 
 .switch {
@@ -133,11 +149,23 @@ header {
     border: none;
 }
 
-.switch div {
+.switch-light {
+    position: relative;
+    left: 0;
     width: 15px;
     height: 15px;
     background-color: white;
     border-radius: 100px;
+    transition: 400ms;
+}
+.switch-dark {
+    position: relative;
+    left: 23px;
+    width: 15px;
+    height: 15px;
+    background-color: orangered;
+    border-radius: 100px; 
+    transition: 400ms;
 }
 
 header p {
